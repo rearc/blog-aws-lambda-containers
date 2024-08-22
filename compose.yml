@@ -1,0 +1,13 @@
+services:
+  lambda:
+    build:
+      context: .
+    ports:
+      - '8080:8080'
+  test:
+    depends_on: [lambda]
+    image: busybox
+    command:
+      - /bin/sh
+      - -c
+      - wget -q -O - http://lambda:8080
